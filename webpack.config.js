@@ -8,7 +8,7 @@ require("regenerator-runtime");
 module.exports = (env, argv) => ({
   entry: path.join(__dirname, 'src/index.js'),
   output: {
-    path: path.join(__dirname, 'dist/js'),
+    path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
     publicPath: '/',
   },
