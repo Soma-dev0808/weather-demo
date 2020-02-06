@@ -41,7 +41,7 @@
     "start": "webpack-dev-server --mode=development",
     "build": "webpack --mode=production",
     "build:dev": "webpack --mode=development",
-    "deploy": "gh-pages -d dist/js"
+    "deploy": "gh-pages -d dist"
   },
   "eslintConfig": {
     "extends": "react-app"
