@@ -41,18 +41,14 @@ module.exports = (env, argv) => ({
       {
         test: /\.(scss|css)$/,
         use: [
-            {
-              loader:  'style-loader',
-            },
+            { loader:  'style-loader' },
            {
              loader: 'css-loader',
              options: {
              url: false
             }
            },
-           {
-             loader: 'sass-loader'
-           }
+           { loader: 'sass-loader' }
         ],
         include: [
             path.join(__dirname, 'src'),
