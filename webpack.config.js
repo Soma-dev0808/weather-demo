@@ -10,7 +10,7 @@ module.exports = (env, argv) => ({
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/',
+    publicPath: '/weather-demo/',
   },
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
