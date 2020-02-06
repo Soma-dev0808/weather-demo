@@ -10,7 +10,7 @@ function App() {
   // This is to change background image of webpage depending on weather.
   const [weatherStatus, setWeatherStatus] = useState('app-container Clear');
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/weather-demo">
       <section className={weatherStatus}>
         <div className="color-filter">
           <Route
