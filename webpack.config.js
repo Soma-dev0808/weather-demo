@@ -12,10 +12,6 @@ module.exports = (env, argv) => ({
     filename: 'bundle.js',
     publicPath: '/weather-demo/',
   },
-  devServer: {
-    contentBase: path.join(__dirname, 'dist'),
-    watchContentBase: true,
-  },
   module: {
     rules: [
       {
@@ -52,17 +48,21 @@ module.exports = (env, argv) => ({
         ]
       },
       {
-        test: /\.(jpg|png|svg)$/,
-        loader: 'file-loader?name=/../src/assets/imgs/[name].[ext]'
+        test: /\.(jpg|png|svg|gif)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 10000,
+            }
+          }
+        ]
       }
     ]
   },
   resolve: {
     modules: [path.join(__dirname,'src'), 'node_modules'],
     extensions: ['.js', '.jsx']
-  },
-  devServer: {
-    historyApiFallback: true,
   },
   plugins: [
     new HtmlWebpackPlugin({

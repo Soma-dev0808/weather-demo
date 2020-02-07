@@ -32,7 +32,9 @@ function WeatherPage(props) {
         <p className="del-mg-bottom">Do you want to get daily weather info?</p>
         <p className="del-mg-bottom">↓</p>
 
+      <div>
         <GetWeatherButton props={props} />
+      </div>
       </section>
     </section>
   );
