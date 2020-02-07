@@ -133,6 +133,24 @@
         font-size: 1.2rem;
         text-align: center;
         border-bottom: 2px solid #eee;
+
+        
+        &::placeholder {
+            font-size: 0.8rem !important;
+        }
+
+        &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+            font-size: 0.8rem !important;
+        }
+        &::-moz-placeholder { /* Firefox 19+ */
+            font-size: 0.8rem !important;
+        }
+        &:-ms-input-placeholder { /* IE 10+ */
+            font-size: 0.8rem !important;
+        }
+        &:-moz-placeholder { /* Firefox 18- */
+            font-size: 0.8rem !important;
+        }
     }
 
     @media screen and (max-width: $break-500) {

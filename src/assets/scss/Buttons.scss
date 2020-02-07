@@ -43,6 +43,10 @@
 
 .reset-btn {
     background-color: rgb(48, 135, 206); 
+
+    @media screen and (max-width: $break-500) {
+        margin-bottom: 10px !important;
+    }
 }
 
 .reset-home-btn {

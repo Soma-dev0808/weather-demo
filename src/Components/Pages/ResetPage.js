@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { withFirebase } from '../../config';
 import HomeButton from '../ButtonComponents/HomeButton';
+import Loading from '../LoadingComponent/Loading';
 
 function ResetPage(props) {
   const { firebase } = props;
@@ -12,6 +13,9 @@ function ResetPage(props) {
 
   // When error occured for api call to firebase
   const [error, setError] = useState('');
+
+  // Loading
+  const [isLoading, setIsLoading] = useState(false);
 
   // Onchange input
   function updateForm({ target: { value } }) {
@@ -28,12 +32,15 @@ function ResetPage(props) {
       }, 2000);
       return;
     } else {
+      setIsLoading(true);
       firebase
         .doPasswordReset(email)
         .then(res => {
+          setIsLoading(false);
           setSuccess('Successfully sent reset email to your email address.');
         })
         .catch(err => {
+          setIsLoading(false);
           console.log(err.message);
           setError(err.message);
         });
@@ -45,33 +52,36 @@ function ResetPage(props) {
   }
 
   return (
-    <section className="weather-container reset-container">
-      <header className="reset-header">
-        <h3>Reset password</h3>
-        <p>Input email address to update your password</p>
-      </header>
+    <>
+      <section className="weather-container reset-container">
+        <header className="reset-header">
+          <h3>Reset password</h3>
+          <p>Input email address to update your password</p>
+        </header>
 
-      <form onSubmit={submitForm} className="reset-form">
-        <input
-          type="email"
-          name="email"
-          value={email}
-          onChange={updateForm}
-          placeholder="Email Address"
-          className="email-input"
-        />
-        <button type="submit" className="btnMine reset-btn">
-          Reset Password
-        </button>
-      </form>
-      <div className="reset-response">
-        {error ? <p className="error">{error}</p> : ''}
-        {success ? <p className="success">{success}</p> : ''}
-      </div>
-      <div className="reset-home-btn">
-        <HomeButton props={props} />
-      </div>
-    </section>
+        <form onSubmit={submitForm} className="reset-form">
+          <input
+            type="email"
+            name="email"
+            value={email}
+            onChange={updateForm}
+            placeholder="Email Address"
+            className="email-input"
+          />
+          <button type="submit" className="btnMine reset-btn">
+            Reset Password
+          </button>
+        </form>
+        <div className="reset-response">
+          {error ? <p className="error">{error}</p> : ''}
+          {success ? <p className="success">{success}</p> : ''}
+        </div>
+        <div className="reset-home-btn">
+          <HomeButton props={props} />
+        </div>
+      </section>
+      {isLoading ? <Loading isLoading={isLoading} /> : ''}
+    </>
   );
 }
 
