@@ -35,13 +35,6 @@ module.exports = (env, argv) => ({
         exclude: /node_modules/,
       },
       {
-        test: /\.(jpg|png|svg)$/,
-        loader: 'url-loader',
-        options: {
-          limit: 25000,
-        }
-      },
-      {
         test: /\.(scss|css)$/,
         use: [
             { loader:  'style-loader' },
@@ -58,6 +51,10 @@ module.exports = (env, argv) => ({
             /node_modules/
         ]
       },
+      {
+        test: /\.(jpg|png|svg)$/,
+        loader: 'file-loader?name=/../src/assets/imgs/[name].[ext]'
+      }
     ]
   },
   resolve: {
