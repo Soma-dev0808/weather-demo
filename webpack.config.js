@@ -36,7 +36,10 @@ module.exports = (env, argv) => ({
       },
       {
         test: /\.(jpg|png|svg)$/,
-        loader: 'url-loader'
+        loader: 'url-loader',
+        options: {
+          limit: 25000,
+        }
       },
       {
         test: /\.(scss|css)$/,
