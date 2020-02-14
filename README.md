@@ -35,12 +35,12 @@ Since this app's component structure is not complicated, I didin't use Redux.(In
 
 ## Why React.js and Node.js? 
 
-・React.js
-This app is pretty simple and there's only a few differences between pages(meaning some of component are reusable), so I wanted to create simple and faster App.
-React.js is fast because of the Virtual DOM which is the one of the biggest feature of React.js. Even though sometime we have to change a part of app, it can re-render only changed part. 
-Components make app maintainanceable. We can develope an app with individual compoent. In addition to this, when I found a problem with my code, it's easy to make some changes. Also I reused one component for some situation.
+* React.js <br>
+This app is pretty simple and there's only a few differences between pages(meaning some of component are reusable), so I wanted to create simple and faster App. <br>
+React.js is fast because of the Virtual DOM which is the one of the biggest feature of React.js. Even though sometime we have to change a part of app, it can re-render only changed part. <br> 
+Components make app maintainanceable. We can develope an app with individual compoent. In addition to this, when I found a problem with my code, it's easy to make some changes. Also I reused one component for some situation. <br>
 
-・Node.js
+* Node.js <br>
 The fast server side framework Node.js was matched my portfolio concepts which is fast app. It was also easy to learn and integrate it into app. I created soem API endpoints for LINEnotify and schedule job of notification.
 
 
