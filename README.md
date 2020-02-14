@@ -20,7 +20,7 @@ Since that, I coded frontend and backend for this app.
 
 ## What technology I used
 
-*Resct.js
+* Resct.js
 
 *React.js (Frontend)
   .React router
