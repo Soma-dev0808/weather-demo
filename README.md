@@ -70,4 +70,4 @@ https://soma-dev0808.github.io/weather-demo/notification
 
 ## LICENSE
 
-![MIT LICENSE] (https://github.com/Soma-dev0808/weather-demo/blob/master/LICENSE)
+[MIT LICENSE] (https://github.com/Soma-dev0808/weather-demo/blob/master/LICENSE)
