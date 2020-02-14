@@ -20,7 +20,7 @@ Since that, I coded frontend and backend for this app.
 
 ## What technology I used
 
-* React.js (Frontend)
+* React.js (Frontend) <br>
   -React router
 * SCSS (UI designning)
 * Semantic UI React (UI designning)
