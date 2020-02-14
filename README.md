@@ -20,16 +20,14 @@ Since that, I coded frontend and backend for this app.
 
 ## What technology I used
 
-* Resct.js
-
-*React.js (Frontend)
-  .React router
-*SCSS (UI designning)
-*Semantic UI React (UI designning)
-*Node.js (Backend)
-*PM2 (To demonize a process)
-*Firebase (Authentication)
-*AWS EC2 (As Production Server)
+* React.js (Frontend)
+  -React router
+* SCSS (UI designning)
+* Semantic UI React (UI designning)
+* Node.js (Backend)
+* PM2 (To demonize a process)
+* Firebase (Authentication)
+* AWS EC2 (As Production Server)
 
 Since this app's component structure is not complicated, I didin't use Redux.(In most of cases, it just need to pass props to child component.)
 
