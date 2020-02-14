@@ -8,12 +8,13 @@ export function lineAuth(
   uid,
   zipcode,
   country,
-  { selectedHour, selectedMinute }
+  { selectedHour, selectedMinute },
+  userTimeZone
 ) {
   return new Promise((resolve, reject) => {
     axios
       .get(
-        `${process.env.REACT_APP_BACKEND}/line-notify/token/${uid}/${zipcode}/${country}/${selectedHour}/${selectedMinute}`
+        `${process.env.REACT_APP_BACKEND}/line-notify/token/${uid}/${zipcode}/${country}/${selectedHour}/${selectedMinute}/${userTimeZone}`
       )
       .then(({ data }) => {
         if (data) {

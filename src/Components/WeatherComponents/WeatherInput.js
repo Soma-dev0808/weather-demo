@@ -5,6 +5,7 @@ import { Dropdown } from 'semantic-ui-react';
 import Modal from '../ModalComponent/Modal';
 import Loading from '../LoadingComponent/Loading';
 import SmLoading from '../LoadingComponent/smLoading';
+import moment from 'moment-timezone';
 
 /**
  *
@@ -233,13 +234,14 @@ function WeatherInput({
   function applyNotify() {
     setIsLoading(true);
     const uid = userId;
+    const userTimeZone = moment.tz.guess();
     const secondParam = isSG ? 65 : searchQuery;
 
     // This is used to display user weather config
     localStorage.setItem('weatherConfig', JSON.stringify(saveConfig));
 
     // login to linenotify and set cron job
-    lineAuth(uid, secondParam, checkedItem, { selectedHour, selectedMinute })
+    lineAuth(uid, secondParam, checkedItem, { selectedHour, selectedMinute }, userTimeZone)
       .then(res => {
         window.location.href = res;
       })
