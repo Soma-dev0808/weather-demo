@@ -43,5 +43,19 @@ The fast server side framework Node.js was matched my portfolio concepts which i
 
 ## Before start using App
 
-If you will using notification function, you need to download LINE from [app store.](https://line.me/en-US/download)
+1. If you will using notification function, you need to download LINE from [app store.](https://line.me/en-US/download)
+
+2. Create account for LINE(Please register your email address).
+
+3. Add LINENotify as your friend.(LINENotify is the one notify you.)
+![image](https://user-images.githubusercontent.com/55787141/74505415-09d2f200-4f32-11ea-9cca-9d1d4e1090b2.png)
+
+4. Now ready to use weather-app.
+
+
+## App URL
+
+Please click URL below to access weather-app.
+
+https://soma-dev0808.github.io/weather-demo/notification
 
