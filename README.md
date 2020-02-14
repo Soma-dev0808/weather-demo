@@ -3,7 +3,7 @@
 This application allows an user to check current weather, and notify weather info at specific time everyday if it's configured.
 
 ![image](https://user-images.githubusercontent.com/55787141/74496560-fa45b000-4f15-11ea-8a29-eca19641cd13.png)
-<img src="https://user-images.githubusercontent.com/55787141/74496560-fa45b000-4f15-11ea-8a29-eca19641cd13.png" width="400" height="790">
+<img src="https://user-images.githubusercontent.com/55787141/74496560-fa45b000-4f15-11ea-8a29-eca19641cd13.png" width="400" height="300">
 
 # Why I created this app
 
