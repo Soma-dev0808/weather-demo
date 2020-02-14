@@ -9,11 +9,13 @@ You can see weather info in browser by input zipcode without registration or log
 <img src="https://user-images.githubusercontent.com/55787141/74497208-f581fb80-4f17-11ea-8c7d-f40ce0ddf5db.jpg" width="570" height="300">
 
 
+
 ## Why I created this app
 
 This app is to show my skill of developing.
 I've been developing frontend and backend(in here, I express nodejs as backend) so far in several projects.
 Since that, I coded frontend and backend for this app.
+
 
 
 ## What technology I used
@@ -30,6 +32,7 @@ Since that, I coded frontend and backend for this app.
 Since this app's component structure is not complicated, I didin't use Redux.(In most of cases, it just need to pass props to child component.)
 
 
+
 ## Why React.js and Node.js? 
 
 ・React.js
@@ -39,6 +42,7 @@ Components make app maintainanceable. We can develope an app with individual com
 
 ・Node.js
 The fast server side framework Node.js was matched my portfolio concepts which is fast app. It was also easy to learn and integrate it into app. I created soem API endpoints for LINEnotify and schedule job of notification.
+
 
 
 ## Before start using App
@@ -55,9 +59,15 @@ You can scan QR code in the picture.
 4. Now ready to use weather-app.
 
 
+
 ## App URL
 
 Please click URL below to access weather-app.
 
 https://soma-dev0808.github.io/weather-demo/notification
 
+
+
+## LICENSE
+
+[MIT LICENSE] (https://github.com/Soma-dev0808/weather-demo/blob/master/LICENSE)
