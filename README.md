@@ -13,7 +13,7 @@ You can see weather info in browser by input zipcode without registration or log
 
 This app is to show my skill of developing.
 I've been developing frontend and backend(in here, I express nodejs as backend) so far in several projects.
-Since that, I coded frontend and backend.
+Since that, I coded frontend and backend for this app.
 
 
 ## What technology I used
@@ -49,6 +49,8 @@ The fast server side framework Node.js was matched my portfolio concepts which i
 
 3. Add LINENotify as your friend.(LINENotify is the one notify you.)
 ![image](https://user-images.githubusercontent.com/55787141/74505415-09d2f200-4f32-11ea-9cca-9d1d4e1090b2.png)
+
+You can scan QR code in the picture.
 
 4. Now ready to use weather-app.
 
