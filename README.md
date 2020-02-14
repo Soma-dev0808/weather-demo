@@ -1,8 +1,8 @@
 # weather-demo
 
-This application allows an user to check current weather, and notify weather info by LINENotify at specific time everyday if it's configured.
-To receive notification, you have to sign up to this app.
-You can see weather info in browser by input zipcode without registration or logging in.
+This application allows an user to check current weather, and notify weather info by LINENotify at specific time everyday if it's configured. <br>
+To receive notification, you have to sign up to this app. <br>
+You can see weather info in browser by input zipcode without registration or logging in. <br>
 
 <img src="https://user-images.githubusercontent.com/55787141/74496560-fa45b000-4f15-11ea-8a29-eca19641cd13.png" width="570" height="300">
 
