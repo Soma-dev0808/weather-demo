@@ -12,9 +12,9 @@ You can see weather info in browser by input zipcode without registration or log
 
 ## Why I created this app
 
-This app is to show my skill of developing.
-I've been developing frontend and backend(in here, I express nodejs as backend) so far in several projects.
-Since that, I coded frontend and backend for this app.
+This app is to show my skill of developing. <br>
+I've been developing frontend and backend(in here, I express nodejs as backend) so far in several projects. <br>
+Since that, I coded frontend and backend for this app. <br>
 
 
 
