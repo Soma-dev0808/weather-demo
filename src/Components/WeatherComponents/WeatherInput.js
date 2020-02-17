@@ -94,8 +94,8 @@ function WeatherInput({
           setUserConfig(data);
         })
         .catch(err => {
-          console.log(err);
-          setUserConfig('');
+          localData = JSON.parse(localStorage.getItem('weatherConfig'));
+          setUserConfig(localData ? localData : '');
         });
       setIsSmLoading(false);
     }
@@ -246,7 +246,6 @@ function WeatherInput({
         window.location.href = res;
       })
       .catch(err => {
-        console.log(err);
         setIsLoading(false);
         setError('Someting went wrong.... Please try it again');
       });
@@ -286,7 +285,7 @@ function WeatherInput({
         return;
       })
       .catch(err => {
-        console.log(err);
+        return;
       });
   }
 

@@ -6,11 +6,9 @@ class Auth {
         props.firebase
           .doCreateUserWithEmailAndPassword(userInput.email, userInput.password)
           .then(authUser => {
-            console.log(authUser);
             return resolve(authUser);
           })
           .catch(err => {
-            console.log(err);
             return reject(err);
           });
       });

@@ -41,7 +41,6 @@ class Firebase {
           if (doc.exists) {
             return resolve(doc.data());
           } else {
-            console.log('Document not found');
             return reject(null);
           }
         })

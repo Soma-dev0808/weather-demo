@@ -41,7 +41,6 @@ function ResetPage(props) {
         })
         .catch(err => {
           setIsLoading(false);
-          console.log(err.message);
           setError(err.message);
         });
       setTimeout(() => {
