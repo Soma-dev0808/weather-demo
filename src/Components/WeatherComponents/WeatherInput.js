@@ -238,7 +238,7 @@ function WeatherInput({
     const secondParam = isSG ? 65 : searchQuery;
 
     // This is used to display user weather config
-    localStorage.setItem('weatherConfig', JSON.stringify(saveConfig));
+    localStorage.setItem('preWeatherConfig', JSON.stringify(saveConfig));
 
     // login to linenotify and set cron job
     lineAuth(uid, secondParam, checkedItem, { selectedHour, selectedMinute }, userTimeZone)

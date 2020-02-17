@@ -44,9 +44,15 @@ function NotificationPage(props) {
 
     // When user successfully configured notification.
     if (token) {
-      var { uid, country, min, hour } = JSON.parse(
-        localStorage.getItem('weatherConfig')
+      var { uid, country, city, min, hour } = JSON.parse(
+        localStorage.getItem('preWeatherConfig')
       );
+      localStorage.setItem('weatherConfig', JSON.stringify({ 
+                                                            uid: uid, 
+                                                            country: country, 
+                                                            city: city, 
+                                                            min: min, 
+                                                            hour: hour }));
       firebase.saveUserConfig(uid, { country, min, hour });
       setSuccess('Congrats! You will receive daily weather info everyday!');
       setTimeout(() => {
