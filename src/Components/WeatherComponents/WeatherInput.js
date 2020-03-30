@@ -83,14 +83,6 @@ function WeatherInput({
   // Fetch user weather config
   useEffect(() => {
     setIsSmLoading(true);
-    firebase
-      .getUserConfig(userId)
-      .then(data => {
-        console.log(data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
     var localData = JSON.parse(localStorage.getItem("weatherConfig"));
     if (!!localData) {
       setIsSmLoading(false);
@@ -277,11 +269,12 @@ function WeatherInput({
   function applyStop() {
     setIsLoading(true);
     const uid = userId;
+    var localData = JSON.parse(localStorage.getItem("weatherConfig"));
 
     // stop cron job and delete user weather config in firestore
     cancelJob(uid, firebase)
       .then(({ data }) => {
-        if (data === "Success") {
+        if (data === "Success" || (data === "No schedule set" && !!localData)) {
           localStorage.clear();
           setResForCancel("Successfully stopped!");
           setUserConfig("");
