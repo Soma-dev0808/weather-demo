@@ -1,8 +1,12 @@
 # weather-demo
 
-This application allows an user to check current weather, and notify weather info by LINENotify at specific time everyday if it's configured. <br>
-To receive notification, you have to sign up to this app. <br>
-You can see weather info in browser by input zipcode without registration or logging in. <br>
+This application allows an user to check current weather, and notify weather information by LINENotify at specific time everyday if it's configured. <br>
+
+To receive notification, you have to register/login to this app. <br>
+
+You can see weather information in browser by inputting zipcode without registration or login. <br>
+
+:earth_asia: Currently, this application supports for four countries to fetch weather information. (USA, Germany, Thailand, Singapore)
 
 <img src="https://user-images.githubusercontent.com/55787141/74496560-fa45b000-4f15-11ea-8a29-eca19641cd13.png" width="570" height="300">
 
@@ -13,8 +17,11 @@ You can see weather info in browser by input zipcode without registration or log
 ## Why I created this app
 
 This app is to show my skill of developing. <br>
-I've been developing frontend and backend(in here, I express nodejs as backend) so far in several projects. <br>
-Since that, I coded frontend and backend for this app. <br>
+I've been developing a web application and mobile application uging some languages such as React.js and NativeScript. Threfore I wanted to show my skill with this application. <br>
+
+This application was developed using React.js and Node.js which helps to show my developing skill for frontend and backend. In the node.js side, I created some entrypoints to handle some functions such as connecting with LINENotify. <br>
+
+I also have some experience with using could platform, threfore I integrated firebase for authentication and AWS for managing production server.
 
 
 
@@ -28,20 +35,29 @@ Since that, I coded frontend and backend for this app. <br>
 * PM2 (To demonize a process)
 * Firebase (Authentication)
 * AWS EC2 (As Production Server)
+  - Route53
+  - Elastic IP
+  - Loadbalancer
+  * VPC is default VPC
 
 Since this app's component structure is not complicated, I didin't use Redux.(In most of cases, it just need to pass props to child component.)
 
 
 
-## Why React.js and Node.js? 
+## Structure of this application.
 
-* React.js <br>
-This app is pretty simple and there's only a few differences between pages(meaning some of component are reusable), so I wanted to create simple and faster App. <br>
-React.js is fast because of the Virtual DOM which is the one of the biggest feature of React.js. Even though sometime we have to change a part of app, it can re-render only changed part. <br> 
-Components make app maintainanceable. We can develope an app with individual compoent. In addition to this, when I found a problem with my code, it's easy to make some changes. Also I reused one component for some situation. <br>
+![image](https://user-images.githubusercontent.com/55787141/74638441-d9e05480-51a6-11ea-8653-20280098e5b4.png)
 
-* Node.js <br>
-The fast server side framework Node.js was matched my portfolio concepts which is fast app. It was also easy to learn and integrate it into app. I created soem API endpoints for LINEnotify and schedule job of notification.
+
+
+## Feature 
+
+ * Display current weather by inputting zipcode
+ * Registration/Login/Signout account
+ * Restore password
+ * Connect LINENotify
+ * Send notification 
+ * Stop sending notification
 
 
 
@@ -64,7 +80,7 @@ You can scan QR code in the picture.
 
 Please click URL below to access weather-app.
 
-https://soma-dev0808.github.io/weather-demo/notification
+https://soma-dev0808.github.io/weather-demo/
 
 
 
