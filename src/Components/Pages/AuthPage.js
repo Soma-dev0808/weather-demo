@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { withFirebase } from '../../config';
-import Auth from '../../auth/auth';
-import Modal from '../ModalComponent/Modal';
-import AuthForm from '../AuthComponents/AuthForm';
-import HomeButton from '../ButtonComponents/HomeButton';
-import Loading from '../LoadingComponent/Loading';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import * as action from "../store/actionCreator";
+import { withFirebase } from "../../config";
+import Auth from "../../auth/auth";
+import Modal from "../ModalComponent/Modal";
+import AuthForm from "../AuthComponents/AuthForm";
+import HomeButton from "../ButtonComponents/HomeButton";
+import Loading from "../LoadingComponent/Loading";
 
 /**
  * validate email
@@ -27,11 +29,11 @@ const passwordValidation = password =>
   password.length > 5;
 
 function AuthPage(props) {
-  const { firebase, history } = props;
+  const { history } = props;
 
   const [userInput, setInput] = useState({
-    email: '',
-    password: ''
+    email: "",
+    password: ""
   });
 
   // If this form is for login or register
@@ -45,32 +47,37 @@ function AuthPage(props) {
   const [isShowPass, setIsShowPass] = useState(false);
 
   // Error from api response
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   // loading status
   const [isLoading, setIsLoading] = useState(false);
 
   // Modal
   const [showModal, setShowModal] = useState(false);
-  const [modalTitle, setModalTitle] = useState('');
+  const [modalTitle, setModalTitle] = useState("");
   const [isSubmit, setIsSubmit] = useState(true);
+
+  const isAuthenticated = useSelector(
+    ({ appState }) => appState.isAuthenticated
+  );
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setIsLoading(true);
-    firebase.auth.onAuthStateChanged(authUser => {
-      if (!!authUser) {
-        history.push('/notification');
-      }
-      setIsLoading(false);
-    });
-  }, [firebase, history]);
+
+    if (!!isAuthenticated) {
+      history.push("/notification");
+    }
+    setIsLoading(false);
+  }, [isAuthenticated]);
 
   // Validate user input and set state.
   function updateForm({ target: { value, name } }) {
-    if (!isLogin && name === 'email') {
-      setIsValidEmail(emailValidation(value) || value === '');
-    } else if (!isLogin && name === 'password') {
-      setValidPassword(passwordValidation(value) || value === '');
+    if (!isLogin && name === "email") {
+      setIsValidEmail(emailValidation(value) || value === "");
+    } else if (!isLogin && name === "password") {
+      setValidPassword(passwordValidation(value) || value === "");
     }
     setInput({ ...userInput, [name]: value });
   }
@@ -83,7 +90,7 @@ function AuthPage(props) {
         return sendSignIn();
       }
       if (isValidEmail && isValidPassword) {
-        setModalTitle('Do you want to submit?');
+        setModalTitle("Do you want to submit?");
         return handleOpenModal();
       }
     } else {
@@ -93,24 +100,24 @@ function AuthPage(props) {
 
   // For empty form
   function createEmptyMessage() {
-    let errMes = 'Please input ';
+    let errMes = "Please input ";
 
     if (!!userInput.email === false) {
-      if (errMes.includes('User name')) {
-        errMes += '& ';
+      if (errMes.includes("User name")) {
+        errMes += "& ";
       }
-      errMes += 'Email address ';
+      errMes += "Email address ";
     }
 
     if (!!userInput.password === false) {
-      if (errMes.includes('User name') || errMes.includes('Email address')) {
-        errMes += '& ';
+      if (errMes.includes("User name") || errMes.includes("Email address")) {
+        errMes += "& ";
       }
-      errMes += 'Password ';
+      errMes += "Password ";
     }
     setError(errMes);
     setTimeout(() => {
-      setError('');
+      setError("");
     }, 2000);
     return;
   }
@@ -122,16 +129,17 @@ function AuthPage(props) {
       .then(() => {
         setIsLoading(false);
         props.history.push({
-          pathname: '/notification',
-          search: '?query=success',
-          state: { detail: 'SignedUp' }
+          pathname: "/notification",
+          search: "?query=success",
+          state: { detail: "SignedUp" }
         });
       })
       .catch(({ message }) => {
+        dispatch(action.failSignIn(message));
         setError(message);
         setIsLoading(false);
         setTimeout(() => {
-          setError('');
+          setError("");
         }, 3000);
         return;
       });
@@ -141,15 +149,16 @@ function AuthPage(props) {
   function sendSignIn() {
     setIsLoading(true);
     Auth.signIn(userInput, props)
-      .then(() => {
+      .then(authUser => {
         setIsLoading(false);
-        props.history.push('/notification');
+        props.history.push("/notification");
       })
       .catch(({ message }) => {
+        dispatch(action.failSignIn(message));
         setError(message);
         setIsLoading(false);
         setTimeout(() => {
-          setError('');
+          setError("");
         }, 3000);
         return;
       });
@@ -159,8 +168,8 @@ function AuthPage(props) {
   function registerForm() {
     setInput({
       ...userInput,
-      email: '',
-      password: ''
+      email: "",
+      password: ""
     });
     setIsShowPass(false);
     return setIsLogin(false);
@@ -168,7 +177,7 @@ function AuthPage(props) {
 
   // When user click forget button
   function forgetPassword() {
-    history.push('/reset/password');
+    history.push("/reset/password");
   }
 
   // Modal handling
@@ -201,7 +210,7 @@ function AuthPage(props) {
 
   return (
     <section className="weather-container auth-container">
-      {isLoading ? <Loading isLoading={isLoading} /> : ''}
+      {isLoading ? <Loading isLoading={isLoading} /> : ""}
 
       <Modal
         showModal={showModal}

@@ -1,18 +1,53 @@
-import React, { useState } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
-import { withFirebase } from './config';
-import WeatherPage from './Components/Pages/WeatherPage';
-import AuthPage from './Components/Pages/AuthPage';
-import ResetPage from './Components/Pages/ResetPage';
-import NotificationPage from './Components/Pages/NotificationPage';
+import React, { useState, useEffect } from "react";
+import { useDispatch, Provider } from "react-redux";
+import * as action from "./Components/store/actionCreator";
+import Store from "./redux/store";
+import { BrowserRouter, Route, useLocation } from "react-router-dom";
+import { withFirebase } from "./config";
+import {
+  WeatherPage,
+  AuthPage,
+  ResetPage,
+  NotificationPage
+} from "./Components/Pages";
 
-function App() {
+function App(props) {
   // This is to change background image of webpage depending on weather.
-  const [weatherStatus, setWeatherStatus] = useState('app-container Clear');
-  return (
-    <BrowserRouter basename="/weather-demo">
+  const [weatherStatus, setWeatherStatus] = useState("app-container Clear");
+  const { firebase } = props;
+
+  const ScrollToTop = () => {
+    const dispatch = useDispatch();
+    const { pathname } = useLocation();
+    useEffect(() => {
+      window.scrollTo(0, 0);
+      firebase.auth.onAuthStateChanged(authUser => {
+        console.log(authUser);
+        if (!!authUser) {
+          dispatch(action.signIn());
+          dispatch(action.setUserId(authUser.uid));
+        }
+      });
+    }, [pathname]);
+
+    return null;
+  };
+
+  const Layout = ({ children }) => {
+    return (
       <section className={weatherStatus}>
         <div className="color-filter">
+          <ScrollToTop />
+          {children}
+        </div>
+      </section>
+    );
+  };
+
+  return (
+    <Provider store={Store}>
+      <BrowserRouter basename="/weather-demo">
+        <Layout>
           <Route
             exact
             path="/"
@@ -23,9 +58,9 @@ function App() {
           <Route exact path="/auth" component={AuthPage} />
           <Route exact path="/reset/password" component={ResetPage} />
           <Route exact path="/notification" component={NotificationPage} />
-        </div>
-      </section>
-    </BrowserRouter>
+        </Layout>
+      </BrowserRouter>
+    </Provider>
   );
 }
 

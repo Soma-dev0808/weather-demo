@@ -13,7 +13,7 @@ class Auth {
           });
       });
     } else {
-      return console.log('userinput empty');
+      return console.log("userinput empty");
     }
   }
 

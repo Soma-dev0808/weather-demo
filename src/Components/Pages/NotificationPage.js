@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { withFirebase } from '../../config';
-import { parse } from 'query-string';
-import WeatherInput from '../WeatherComponents/WeatherInput';
-import SignOutButton from '../ButtonComponents/SignOutButton';
-import HomeButton from '../ButtonComponents/HomeButton';
-import Modal from '../ModalComponent/Modal';
-import Loading from '../LoadingComponent/Loading';
+import React, { useState, useEffect } from "react";
+import { withFirebase } from "../../config";
+import { useDispatch, useSelector } from "react-redux";
+import * as action from "../store/actionCreator";
+import { parse } from "query-string";
+import WeatherInput from "../WeatherComponents/WeatherInput";
+import SignOutButton from "../ButtonComponents/SignOutButton";
+import HomeButton from "../ButtonComponents/HomeButton";
+import Modal from "../ModalComponent/Modal";
+import Loading from "../LoadingComponent/Loading";
 
 function NotificationPage(props) {
   const { history, location, firebase } = props;
-
-  const [userId, setUserId] = useState(null);
 
   // For a the loading indicator
   const [isLoading, setIsLoading] = useState(false);
@@ -24,41 +24,59 @@ function NotificationPage(props) {
   const successQuery = params.query;
   const token = params.token;
 
+  const dispatch = useDispatch();
+
+  const isAuthenticated = useSelector(
+    ({ appState }) => appState.isAuthenticated
+  );
+
+  const userId = useSelector(({ appState }) => appState.userId);
+
   useEffect(() => {
     // Listen user status
-    firebase.auth.onAuthStateChanged(authUser => {
-      if (!!authUser === false) {
-        return history.push('/auth');
-      }
-      setUserId(authUser.uid);
-    });
+    if (!!isAuthenticated === false) {
+      return history.push("/auth");
+    }
 
     // When user signed up
     if (successQuery) {
-      setSuccess('Successfully registered!');
+      setSuccess("Successfully registered!");
       setTimeout(() => {
         setSuccess(false);
       }, 3000);
-      history.push('/notification');
+      history.push("/notification");
     }
 
     // When user successfully configured notification.
     if (token) {
       var { uid, country, city, min, hour } = JSON.parse(
-        localStorage.getItem('preWeatherConfig')
+        localStorage.getItem("preWeatherConfig")
       );
-      localStorage.setItem('weatherConfig', JSON.stringify({ 
-                                                            uid: uid, 
-                                                            country: country, 
-                                                            city: city, 
-                                                            min: min, 
-                                                            hour: hour }));
+      // localStorage.setItem(
+      //   "weatherConfig",
+      //   JSON.stringify({
+      //     uid: uid,
+      //     country: country,
+      //     city: city,
+      //     min: min,
+      //     hour: hour
+      //   })
+      // );
+      dispatch(
+        action.setWeatherConfig({
+          uid: uid,
+          country: country,
+          city: city,
+          min: min,
+          hour: hour
+        })
+      );
       firebase.saveUserConfig(uid, { country, min, hour });
-      setSuccess('Congrats! You will receive daily weather info everyday!');
+      setSuccess("Congrats! You will receive daily weather info everyday!");
       setTimeout(() => {
         setSuccess(false);
       }, 3000);
-      history.push('/notification');
+      history.push("/notification");
     }
   }, [token, successQuery, firebase, history]);
 
@@ -71,6 +89,7 @@ function NotificationPage(props) {
   function handleOk() {
     setIsLoading(true);
     firebase.doSignOut();
+    dispatch(action.signOut());
     setIsLoading(false);
   }
 
@@ -84,13 +103,13 @@ function NotificationPage(props) {
       <Modal
         showModal={showModal}
         closeModal={handleCloseModal}
-        title={'Do you want to Sign out?'}
+        title={"Do you want to Sign out?"}
         handleOk={handleOk}
         isSubmit={false}
       />
       <section className="weather-container notification-container">
         <header className="notification-header">
-          {success ? <p className="success">{success}</p> : ''}
+          {success ? <p className="success">{success}</p> : ""}
         </header>
         <section>
           <WeatherInput forNotify={true} userId={userId} />
@@ -100,7 +119,7 @@ function NotificationPage(props) {
           <SignOutButton clickSignOut={clickSignOut} />
         </section>
       </section>
-      {isLoading ? <Loading isLoading={isLoading} /> : ''}
+      {isLoading ? <Loading isLoading={isLoading} /> : ""}
     </>
   );
 }

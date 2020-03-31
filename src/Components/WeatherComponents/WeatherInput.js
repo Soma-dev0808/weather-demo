@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { withFirebase } from "../../config";
+import { useDispatch, useSelector } from "react-redux";
+import * as action from "../store/actionCreator";
 import { lineAuth, cancelJob } from "../../API_Caller/apiService";
 import { Dropdown } from "semantic-ui-react";
 import Modal from "../ModalComponent/Modal";
@@ -80,13 +82,16 @@ function WeatherInput({
   const [modalTitle, setModalTitle] = useState("");
   const [isSubmit, setIsSubmit] = useState(true);
 
+  const dispatch = useDispatch();
+  const weatherConfig = useSelector(({ appState }) => appState.weatherConfig);
+
   // Fetch user weather config
   useEffect(() => {
     setIsSmLoading(true);
-    var localData = JSON.parse(localStorage.getItem("weatherConfig"));
-    if (!!localData) {
+    // var localData = JSON.parse(localStorage.getItem("weatherConfig"));
+    if (!!weatherConfig) {
       setIsSmLoading(false);
-      setUserConfig(localData);
+      setUserConfig(weatherConfig);
     } else {
       firebase
         .getUserConfig(userId)
@@ -94,8 +99,7 @@ function WeatherInput({
           setUserConfig(data);
         })
         .catch(err => {
-          localData = JSON.parse(localStorage.getItem("weatherConfig"));
-          setUserConfig(localData ? localData : "");
+          setUserConfig(weatherConfig ? weatherConfig : "");
         });
       setIsSmLoading(false);
     }
@@ -269,14 +273,13 @@ function WeatherInput({
   function applyStop() {
     setIsLoading(true);
     const uid = userId;
-    var localData = JSON.parse(localStorage.getItem("weatherConfig"));
 
     // stop cron job and delete user weather config in firestore
     cancelJob(uid, firebase)
       .then(({ data }) => {
-        if (data === "Success" || (data === "No schedule set" && !!localData)) {
-          localStorage.clear();
+        if (data === "Success") {
           setResForCancel("Successfully stopped!");
+          dispatch(action.removeWeatherConfig());
           setUserConfig("");
           firebase
             .getUserConfig(userId)
