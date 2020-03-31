@@ -25,19 +25,30 @@ function NotificationPage(props) {
   const token = params.token;
 
   const dispatch = useDispatch();
-
-  const isAuthenticated = useSelector(
-    ({ appState }) => appState.isAuthenticated
-  );
-
   const userId = useSelector(({ appState }) => appState.userId);
+
+  // Fetch user weather config
+  useEffect(() => {
+    firebase
+      .getUserConfig(userId)
+      .then(data => {
+        dispatch(action.setWeatherConfig(data));
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, [userId]);
 
   useEffect(() => {
     // Listen user status
-    if (!!isAuthenticated === false) {
-      return history.push("/auth");
-    }
+    firebase.auth.onAuthStateChanged(authUser => {
+      if (!!authUser === false) {
+        return history.push("/auth");
+      }
+    });
+  }, []);
 
+  useEffect(() => {
     // When user signed up
     if (successQuery) {
       setSuccess("Successfully registered!");
@@ -52,16 +63,6 @@ function NotificationPage(props) {
       var { uid, country, city, min, hour } = JSON.parse(
         localStorage.getItem("preWeatherConfig")
       );
-      // localStorage.setItem(
-      //   "weatherConfig",
-      //   JSON.stringify({
-      //     uid: uid,
-      //     country: country,
-      //     city: city,
-      //     min: min,
-      //     hour: hour
-      //   })
-      // );
       dispatch(
         action.setWeatherConfig({
           uid: uid,

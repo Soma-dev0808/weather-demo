@@ -22,7 +22,6 @@ function App(props) {
     useEffect(() => {
       window.scrollTo(0, 0);
       firebase.auth.onAuthStateChanged(authUser => {
-        console.log(authUser);
         if (!!authUser) {
           dispatch(action.signIn());
           dispatch(action.setUserId(authUser.uid));

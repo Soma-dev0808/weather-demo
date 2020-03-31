@@ -87,23 +87,8 @@ function WeatherInput({
 
   // Fetch user weather config
   useEffect(() => {
-    setIsSmLoading(true);
-    // var localData = JSON.parse(localStorage.getItem("weatherConfig"));
-    if (!!weatherConfig) {
-      setIsSmLoading(false);
-      setUserConfig(weatherConfig);
-    } else {
-      firebase
-        .getUserConfig(userId)
-        .then(data => {
-          setUserConfig(data);
-        })
-        .catch(err => {
-          setUserConfig(weatherConfig ? weatherConfig : "");
-        });
-      setIsSmLoading(false);
-    }
-  }, [userId, firebase]);
+    setUserConfig(weatherConfig);
+  }, [weatherConfig]);
 
   // When user type zipcode
   function updateSearchQuery({ target: { value } }) {
@@ -188,6 +173,7 @@ function WeatherInput({
         status = "Sand";
       }
 
+      // Change background image based on the weather
       weatherStatus("app-container " + status);
     }
     // For notification
