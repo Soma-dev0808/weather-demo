@@ -29,6 +29,7 @@ I also have some experience with using could platform, threfore I integrated fir
 
 * React.js (Frontend) <br>
   - React router
+  - Redux
 * SCSS (UI designning)
 * Semantic UI React (UI designning)
 * Node.js (Backend)
@@ -39,9 +40,6 @@ I also have some experience with using could platform, threfore I integrated fir
   - Elastic IP
   - Loadbalancer
   * VPC is default VPC
-
-Since this app's component structure is not complicated, I didin't use Redux.(In most of cases, it just need to pass props to child component.)
-
 
 
 ## Structure of this application.
